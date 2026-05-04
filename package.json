@@ -10,13 +10,24 @@
   "files": [
     "dist"
   ],
+  "keywords": [
+    "sql",
+    "mapper",
+    "data-transform",
+    "nested",
+    "flat-to-nested",
+    "object-mapper",
+    "typescript",
+    "utility",
+    "orm-helper",
+    "query-result"
+  ],
   "scripts": {
     "test": "jest",
     "dev": "node src/index.ts",
     "start": "node dist/index.js",
     "build": "tsup"
   },
-  "keywords": [],
   "type": "module",
   "author": "",
   "license": "ISC",
