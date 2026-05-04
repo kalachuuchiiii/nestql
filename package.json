@@ -1,7 +1,7 @@
 {
   "name": "nestql",
   "version": "1.0.3",
-  "description": "",
+  "description": "A lightweight utility library for extracting and transforming prefixed keys from flat objects into organized nested structures with customizable casing.",
   "types": "./dist/index.dts",
   "exports": {
     ".": "./dist/index.js"
