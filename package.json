@@ -39,5 +39,9 @@
     "ts-node": "^10.9.2",
     "tsup": "^8.5.1",
     "typescript": "^6.0.3"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kalachuuchiiii/nestql.git"
   }
 }
