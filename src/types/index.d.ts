@@ -7,7 +7,6 @@ export type Option =
       pick?: string[];
       omit?: undefined;
       throwOnError?: boolean;
-      keepPrefixKeysCasing?: boolean;
     }
   | {
       prefix: string;
@@ -15,7 +14,6 @@ export type Option =
       pick?: undefined;
       omit?: string[];
       throwOnError?: boolean;
-      keepPrefixKeysCasing?: boolean;
     };
 
 export type FlatRecord = Record<string, unknown>;

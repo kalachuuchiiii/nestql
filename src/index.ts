@@ -13,13 +13,7 @@ const nestql = <T extends Record<string, unknown>>(
   option: Option
 ) => {
   let object = {} as T;
-  const {
-    casing = "camel",
-    pick,
-    omit,
-    throwOnError = false,
-    keepPrefixKeysCasing = false,
-  } = option;
+  const { casing = "camel", pick, omit, throwOnError = false } = option;
   const prefix = option.prefix.trim();
 
   try {
