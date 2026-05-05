@@ -6,7 +6,7 @@ A lightweight utility library for extracting and transforming prefixed keys from
 
 - **Prefix-based extraction** - Isolate keys with a specific prefix
 - **Flexible casing** - Convert keys to camelCase, snake_case, or PascalCase
-- **Key filtering** - Whitelist or blacklist specific keys
+- **Key filtering** - pick or omit specific keys
 - **Error handling** - Graceful error handling with optional error throwing
 - **Type-safe** - Full TypeScript support with type definitions
 
