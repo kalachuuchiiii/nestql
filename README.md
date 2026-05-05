@@ -4,11 +4,11 @@ A lightweight utility library for extracting and transforming prefixed keys from
 
 ## Features
 
-- **Prefix-based extraction** - Isolate keys with a specific prefix
-- **Flexible casing** - Convert keys to camelCase, snake_case, or PascalCase
-- **Key filtering** - pick or omit specific keys
-- **Error handling** - Graceful error handling with optional error throwing
-- **Type-safe** - Full TypeScript support with type definitions
+- **Prefix-based extraction**: Isolate keys with a specific prefix followed by an underscore.
+- **Flexible casing**: Convert keys to camelCase, snake_case, PascalCase, or keep original casing.
+- **Key filtering**: Include (pick) or exclude (omit) specific keys; omit takes precedence if both are provided.
+- **Error handling**: Graceful error handling with optional error throwing.
+- **Type-safe**: Full TypeScript support with type definitions.
 
 ## Installation
 
@@ -23,40 +23,50 @@ npm install nestql
 ```javascript
 import nestql from "nestql";
 
-const flatObject = {
+const flatUserObject = {
   user_username: "john_doe",
   user_email: "john@example.com",
+  user_password: "secretpassword120",
   user_profile_picture: "profile.jpg",
+  user_id: 1,
+  user_created_at: "2026-05-05T10:30:00.000Z",
+  user_updated_at: "2026-05-06T12:00:00.000Z",
+  user_is_verified: true,
+  user_role: "admin",
+  user_last_login_at: "2026-05-07T08:15:45.000Z",
   app_name: "MyApp",
 };
 
-const result = nestql(flatObject, {
+const user = nestql(flatUserObject, {
   prefix: "user",
-  casing: "camel",
+  omit: ["password", "email", "role"], // Exclude sensitive fields
 });
 
-// Result:
-// {
+// user = {
 //   username: 'john_doe',
-//   email: 'john@example.com',
-//   profilePicture: 'profile.jpg'
+//   profilePicture: 'profile.jpg',
+//   id: 1,
+//   createdAt: '2026-05-05T10:30:00.000Z',
+//   updatedAt: '2026-05-06T12:00:00.000Z',
+//   isVerified: true,
+//   lastLoginAt: '2026-05-07T08:15:45.000Z'
 // }
 ```
 
 ### Options
 
-| Option         | Type                           | Required | Description                                      |
-| -------------- | ------------------------------ | -------- | ------------------------------------------------ |
-| `prefix`       | string                         | Yes      | The prefix to filter keys by                     |
-| `casing`       | "camel" \| "snake" \| "pascal" | No       | Case conversion for keys (default: "camel")      |
-| `whitelist`    | string[]                       | No       | Only include these keys (unprefixed)             |
-| `blacklist`    | string[]                       | No       | Exclude these keys (unprefixed)                  |
-| `throwOnError` | boolean                        | No       | Throw errors instead of logging (default: false) |
+| Option         | Type                                     | Required | Description                                                                           |
+| -------------- | ---------------------------------------- | -------- | ------------------------------------------------------------------------------------- |
+| `prefix`       | string                                   | Yes      | The prefix to filter keys by prefixes (e.g. user, user_info)                          |
+| `casing`       | "camel" \| "snake" \| "pascal" \| "keep" | No       | Case conversion for keys (default: "camel")                                           |
+| `pick`         | string[]                                 | No       | Only include these keys (flat version & unprefixed). Cannot be used with `omit`       |
+| `omit`         | string[]                                 | No       | Exclude these keys (flat version & unprefixed). Overrides `pick` if both are provided |
+| `throwOnError` | boolean                                  | No       | Throw errors instead of logging (default: false)                                      |
 
 ### Casing Examples
 
 ```javascript
-// camelCase
+// camelCase (default)
 nestql(
   { user_profile_picture: "pic.jpg" },
   { prefix: "user", casing: "camel" }
@@ -76,21 +86,25 @@ nestql(
   { prefix: "user", casing: "pascal" }
 );
 // { ProfilePicture: 'pic.jpg' }
+
+// Keep original
+nestql({ user_profile_picture: "pic.jpg" }, { prefix: "user", casing: "keep" });
+// { profile_picture: 'pic.jpg' }
 ```
 
 ### Filtering Keys
 
 ```javascript
-// Whitelist
+// Include only specific keys
 nestql(obj, {
   prefix: "user",
-  whitelist: ["username", "email"], // Only these keys
+  pick: ["username", "email"], // Only these keys
 });
 
-// Blacklist
+// Exclude specific keys
 nestql(obj, {
   prefix: "user",
-  blacklist: ["password"], // Exclude these keys
+  omit: ["password"], // Exclude these keys
 });
 ```
 
@@ -98,16 +112,19 @@ nestql(obj, {
 
 The library also exports helpful utility functions:
 
-- **`capitalize(str)`** - Capitalize the first letter of a string
-- **`getCasedKey(key, casing)`** - Convert a key to the specified case
-- **`isPureObject(value)`** - Check if a value is a pure object (not array, null, etc.)
+- **`capitalize(str: string)`** - Capitalize the first letter of a string.
+- **`toSnakeCase(str: string)`** - Convert a string to snake_case.
+- **`toCamelCase(str: string)`** - Convert a string to camelCase.
+- **`toPascalCase(str: string)`** - Convert a string to PascalCase.
+- **`toCasedKey(key: string, casing?: Case)`** - Convert a key to the specified case.
+- **`isPureObject(value: unknown)`** - Check if a value is a pure object (not array, null, etc.).
 
 ## Error Handling
 
 ```javascript
 // Log errors (default behavior)
 nestql(invalidInput, { prefix: "user" });
-// Console: "nestql: Flat object must be a pure object"
+// Console: "nestql: flat object must be a pure object"
 
 // Throw errors
 try {
