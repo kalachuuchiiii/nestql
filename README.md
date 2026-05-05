@@ -8,7 +8,8 @@ A lightweight utility library for extracting and transforming prefixed keys from
 - **Flexible casing**: Convert keys to camelCase, snake_case, PascalCase, or keep original casing.
 - **Key filtering**: Include (pick) or exclude (omit) specific keys; omit takes precedence if both are provided.
 - **Error handling**: Graceful error handling with optional error throwing.
-- **Type-safe**: Full TypeScript support with type definitions.
+- **Type-safe**: Full TypeScript support with
+  type definitions.
 
 ## Installation
 
