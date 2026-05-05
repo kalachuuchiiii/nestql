@@ -19,9 +19,15 @@
     "object-mapper",
     "typescript",
     "utility",
-    "orm-helper",
-    "query-result"
+    "orm",
+    "query-transform",
+    "casing",
+    "data-mapper"
   ],
+  "engines": {
+    "node": ">=18"
+  },
+  "sideEffects": false,
   "scripts": {
     "test": "jest",
     "dev": "node src/index.ts",
@@ -29,19 +35,26 @@
     "build": "tsup"
   },
   "type": "module",
-  "author": "",
-  "license": "ISC",
-  "devDependencies": {
-    "@types/jest": "^30.0.0",
-    "jest": "^30.3.0",
-    "nodemon": "^3.1.14",
-    "ts-jest": "^29.4.9",
-    "ts-node": "^10.9.2",
-    "tsup": "^8.5.1",
-    "typescript": "^6.0.3"
+  "author": {
+    "name": "Paris Liam",
+    "email": "parissrowlet@gmail.com",
+    "url": "https://github.com/kalachuuchiiii"
   },
+  "license": "MIT",
+  "devDependencies": {
+    "@types/jest": "30.0.0",
+    "jest": "30.3.0",
+    "ts-jest": "29.4.9",
+    "tsup": "8.5.1",
+    "typescript": "6.0.3"
+  },
+  "packageManager": "npm@10.0.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/kalachuuchiiii/nestql.git"
-  }
+  },
+  "bugs": {
+    "url": "https://github.com/kalachuuchiiii/nestql/issues"
+  },
+  "homepage": "https://github.com/kalachuuchiiii/nestql#nestql"
 }
