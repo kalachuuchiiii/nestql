@@ -137,4 +137,4 @@ try {
 
 ## License
 
-ISC
+MIT
